@@ -1,5 +1,5 @@
 import "./styles.css";
-import NDJSONTable from "./components/NDJSONTable";
+import NDJSONTable from "./components/NDJSONTable/NDJSONTable";
 
 export default function App() {
   return (

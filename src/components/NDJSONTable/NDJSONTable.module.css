@@ -1,0 +1,54 @@
+.container {
+  width: 100%;
+}
+
+.gridRow {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1px;
+}
+
+.gridRow > div {
+  display: flex;
+  align-items: center;
+}
+
+.gridRow > div > pre {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: var(--white);
+  color: var(--dark-gray);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-medium);
+}
+
+.header > div {
+  padding: 8px 6px;
+  background-color: var(--secondary-blue);
+}
+
+.rowContainer {
+  background-color: var(--white);
+}
+
+.rowContainer:nth-child(even) > .row > div {
+  background-color: var(--primary-blue);
+}
+
+.row {
+  font-size: var(--font-size-small);
+  color: var(--dark-gray);
+  height: 24px;
+  cursor: pointer;
+}
+
+.row > div:last-child {
+  padding: 0 6px;
+}
+
+.expandedRow {
+  background-color: var(--secondary-blue);
+}

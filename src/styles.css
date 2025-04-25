@@ -3,18 +3,28 @@
   text-align: center;
 }
 
-.log-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  max-height: 24px;
-  height: 24px;
-  border-bottom: 1px solid #000;
-}
+:root {
+  --primary-blue: #e3f2fd;
+  --secondary-blue: #bbdefb;
+  --accent-blue: #90caf9;
+  --light-blue: #f5f9ff;
+  --dark-blue: #64b5f6;
+  --text-blue: #1976d2;
+  --hover-blue: #42a5f5;
+  --border-blue: #bbdefb;
+  --darkest-blue: #005cc5;
+  --shadow-blue: rgba(33, 150, 243, 0.1);
+  --black: #000000;
+  --dark-gray: #555555;
+  --white: #ffffff;
+  --light-gray: #f6f8fa;
+  --dark-red: #b31d28;
 
-.log-row div {
-  text-align: left;
-  text-wrap: nowrap;
-  overflow: hidden;
+  --font-size-small: 14px;
+  --font-size-medium: 16px;
+  --font-size-large: 20px;
+
+  --font-weight-light: 300;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
 }

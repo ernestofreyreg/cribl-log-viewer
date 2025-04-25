@@ -1,0 +1,67 @@
+/* LogEntry.module.css */
+.logEntryContainer {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  background-color: var(--light-gray);
+  padding: 16px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-small);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  text-align: left;
+}
+
+.bracketOpen,
+.bracketClose {
+  color: var(--dark-gray);
+  font-weight: var(--font-weight-bold);
+  margin-left: 0;
+}
+
+.logContent {
+  margin-left: 20px;
+}
+
+.logRow {
+  display: block;
+  align-items: flex-start;
+}
+
+.keyName {
+  color: var(--dark-red);
+  margin-right: 8px;
+}
+
+.stringValue {
+  color: var(--dark-red);
+  word-break: break-word;
+}
+
+.numberValue {
+  color: var(--darkest-blue);
+}
+
+.booleanValue {
+  color: var(--dark-blue);
+}
+
+.nullValue {
+  color: var(--dark-gray);
+  font-style: italic;
+}
+
+.defaultValue {
+  color: var(--dark-gray);
+}
+
+.nestedValue {
+  display: flex;
+  flex-direction: column;
+  color: var(--dark-gray);
+}
+
+.nestedContent {
+  margin-left: 20px;
+}

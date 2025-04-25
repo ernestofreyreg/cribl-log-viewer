@@ -1,16 +1,11 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { AutoSizer, List, ScrollParams } from "react-virtualized";
-import { throttle } from "../lib/throttle";
+import { useCallback, useEffect, useState } from "react";
+import { throttle } from "./throttle";
 
 interface Row {
   [key: string]: string | number | boolean | null;
 }
 
-interface NDJSONTableProps {
-  url: string;
-}
-
-const NDJSONTable: React.FC<NDJSONTableProps> = ({ url }) => {
+export function useRemoteNDJSON(url: string) {
   const [rows, setRows] = useState<Row[]>([]);
   const [reader, setReader] = useState<ReadableStreamDefaultReader | null>(
     null
@@ -67,60 +62,15 @@ const NDJSONTable: React.FC<NDJSONTableProps> = ({ url }) => {
     }
   }, [reader, buffer, decoder, isDone, isLoading]);
 
-  const throttledProcessChunk = useCallback(throttle(processChunk, 500), [
+  const loadNextChunk = useCallback(throttle(processChunk, 500), [
     processChunk,
   ]);
 
   useEffect(() => {
     if (rows.length === 0) {
-      throttledProcessChunk();
+      loadNextChunk();
     }
-  }, [rows, throttledProcessChunk]);
+  }, [rows, loadNextChunk]);
 
-  const rowRenderer = ({
-    index,
-    key,
-    style,
-  }: {
-    index: number;
-    key: string;
-    style: React.CSSProperties;
-  }) => (
-    <div className="log-row" key={key} style={style}>
-      <div>{index}</div>
-      <div>
-        <pre>{JSON.stringify(rows[index])}</pre>
-      </div>
-    </div>
-  );
-
-  const handleScroll = useCallback(
-    (event: ScrollParams) => {
-      const { scrollTop, clientHeight, scrollHeight } = event;
-      const threshold = clientHeight / 2;
-      if (scrollTop + threshold >= scrollHeight - threshold) {
-        throttledProcessChunk();
-      }
-    },
-    [throttledProcessChunk]
-  );
-
-  return (
-    <div style={{ height: "80vh", width: "100%" }}>
-      <AutoSizer>
-        {({ width, height }) => (
-          <List
-            height={height}
-            rowCount={rows.length}
-            rowHeight={24}
-            rowRenderer={rowRenderer}
-            width={width}
-            onScroll={handleScroll}
-          />
-        )}
-      </AutoSizer>
-    </div>
-  );
-};
-
-export default NDJSONTable;
+  return { rows, isDone, isLoading, loadNextChunk };
+}

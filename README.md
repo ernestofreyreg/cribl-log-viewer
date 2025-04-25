@@ -10,8 +10,8 @@ A React app/components for efficiently viewing and streaming large NDJSON (Newli
 - [x] Throttled processing to prevent overwhelming the browser
 - [x] Handles backpressure and incomplete JSON lines
 - [x] Responsive design that adapts to container size
-- [ ] Implemented suggested design using CSS (no UI frameworks/kits)
-- [ ] Selecting a data row, expands the data in a more human readable format.
+- [x] Implemented suggested design using CSS (no UI frameworks/kits)
+- [x] Selecting a data row, expands the data in a more human readable format.
 - [ ] Tests implemented for components and logic
 - [ ] Timeline component
 
@@ -23,3 +23,7 @@ I personally use pnpm (https://pnpm.io/) so the instructions are:
 pnpm install
 pnpm run start
 ```
+
+## Added dependencies
+
+- **react-virtualized**: (https://bvaughn.github.io/react-virtualized/). React component for rendering large datasets in list or grid format by only rendering DOM elements that are currently visible in the viewport, significantly reducing memory usage and processing time. Implementing this behavior myself, efficiently, would take me more time.
