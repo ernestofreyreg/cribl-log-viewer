@@ -1,4 +1,8 @@
+import { useCallback, useState } from "react";
+import { Copy } from "../icons/Copy";
 import styles from "./LogEntry.module.css";
+import { Check } from "../icons/Check";
+import { CopyButton } from "../CopyButton/CopyButton";
 
 type JsonValue =
   | string
@@ -65,6 +69,8 @@ export function LogEntry({ logData }: LogEntryProps) {
   return (
     <pre className={styles.viewer} data-testid="log-entry-container">
       {renderValue(logData)}
+
+      <CopyButton data={logData} />
     </pre>
   );
 }

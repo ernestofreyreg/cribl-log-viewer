@@ -48,6 +48,7 @@ export function NDJSONTable({ rows, loadNextChunk, isDone }: NDJSONTableProps) {
       cache={cache}
       columnIndex={0}
       key={key}
+      tabIndex={0}
       parent={listRef.current!}
       rowIndex={index}
     >
@@ -55,6 +56,8 @@ export function NDJSONTable({ rows, loadNextChunk, isDone }: NDJSONTableProps) {
         <div
           className={classNames(styles.row, styles.gridRow)}
           onClick={handleRowClick(index)}
+          role="button"
+          aria-pressed={expandedRow === index}
         >
           <div>
             <Chevron rotated={expandedRow === index} />
@@ -79,8 +82,8 @@ export function NDJSONTable({ rows, loadNextChunk, isDone }: NDJSONTableProps) {
   const handleScroll = useCallback(
     (event: ScrollParams) => {
       const { scrollTop, clientHeight, scrollHeight } = event;
-      const threshold = clientHeight / 2;
-      if (scrollTop + threshold >= scrollHeight - threshold) {
+      const ratio = scrollTop / (scrollHeight - clientHeight);
+      if (ratio >= 0.85) {
         loadNextChunk();
       }
     },

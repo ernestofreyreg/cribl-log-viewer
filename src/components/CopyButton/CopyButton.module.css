@@ -1,0 +1,9 @@
+.copyButton {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--dark-gray);
+}

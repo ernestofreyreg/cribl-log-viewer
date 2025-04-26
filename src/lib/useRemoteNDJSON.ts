@@ -7,9 +7,7 @@ interface Row {
 
 export function useRemoteNDJSON(url: string) {
   const [rows, setRows] = useState<Row[]>([]);
-  const [reader, setReader] = useState<ReadableStreamDefaultReader | null>(
-    null
-  );
+  const [reader, setReader] = useState<ReadableStreamBYOBReader | null>(null);
   const [decoder] = useState(() => new TextDecoder());
   const [buffer, setBuffer] = useState<string>("");
   const [isDone, setIsDone] = useState<boolean>(false);
@@ -18,7 +16,10 @@ export function useRemoteNDJSON(url: string) {
     if (!reader || isDone) return;
 
     try {
-      const { value, done } = await reader.read();
+      let buffered = new ArrayBuffer(60 * 1024); // 60Kb for above the fold buffer
+      const { value, done } = await reader.read(
+        new Uint8Array(buffered, 0, buffered.byteLength)
+      );
       if (done) {
         setIsDone(true);
         return;
@@ -53,7 +54,9 @@ export function useRemoteNDJSON(url: string) {
   useEffect(() => {
     const initStream = async () => {
       const response = await fetch(url);
-      const streamReader = response.body?.getReader();
+      const streamReader = response.body?.getReader({
+        mode: "byob",
+      });
       if (streamReader) {
         setReader(streamReader);
       }
