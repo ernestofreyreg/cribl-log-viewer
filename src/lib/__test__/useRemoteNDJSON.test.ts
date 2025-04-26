@@ -45,7 +45,7 @@ describe("useRemoteNDJSON", () => {
     });
   });
 
-  it.only("handles JSON parsing errors gracefully", async () => {
+  it("handles JSON parsing errors gracefully", async () => {
     const mockData = '{"id": 1}\ninvalid json\n{"id": 2}\n';
     const mockReader = {
       read: jest

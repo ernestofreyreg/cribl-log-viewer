@@ -1,66 +1,35 @@
-.logEntryContainer {
-  font-family: "Consolas", "Monaco", "Courier New", monospace;
+.viewer {
   background-color: var(--light-gray);
-  padding: 16px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  font-size: var(--font-size-small);
-  line-height: 1.5;
-  white-space: pre-wrap;
-  overflow-x: auto;
-  text-align: left;
-}
-
-.bracketOpen,
-.bracketClose {
   color: var(--dark-gray);
-  font-weight: var(--font-weight-bold);
-  margin-left: 0;
+  padding: 1rem;
+  font-family: monospace;
+  font-size: var(--font-size-small);
+  overflow: auto;
+  white-space: pre-wrap;
+  text-align: left;
+  margin: 0;
 }
 
-.logContent {
-  margin-left: 20px;
-}
-
-.logRow {
-  display: flex;
-  align-items: flex-start;
-}
-
-.keyName {
+.key {
   color: var(--dark-red);
-  margin-right: 8px;
 }
 
-.stringValue {
+.string {
   color: var(--dark-red);
-  word-break: break-word;
 }
 
-.numberValue {
+.number {
   color: var(--darkest-blue);
 }
 
-.booleanValue {
-  color: var(--dark-blue);
+.boolean {
+  color: var(--darkest-blue);
 }
 
-.nullValue {
-  color: var(--dark-gray);
-  font-style: italic;
-}
-
-.defaultValue {
+.null {
   color: var(--dark-gray);
 }
 
-.nestedValue {
-  display: flex;
-  flex-direction: column;
-  color: var(--dark-gray);
-}
-
-.nestedContent {
-  margin-left: 20px;
+.nested {
+  padding-left: 1.25rem;
 }
