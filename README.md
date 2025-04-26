@@ -12,7 +12,7 @@ A React app/components for efficiently viewing and streaming large NDJSON (Newli
 - [x] Responsive design that adapts to container size
 - [x] Implemented suggested design using CSS (no UI frameworks/kits)
 - [x] Selecting a data row, expands the data in a more human readable format.
-- [ ] Tests implemented for components and logic
+- [x] Tests implemented for components and logic
 - [ ] Timeline component
 
 ## Installation
