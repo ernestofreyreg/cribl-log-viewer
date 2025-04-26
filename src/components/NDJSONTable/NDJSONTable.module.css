@@ -21,8 +21,8 @@
 .header {
   background-color: var(--white);
   color: var(--dark-gray);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small);
 }
 
 .header > div {
@@ -31,6 +31,10 @@
 }
 
 .rowContainer {
+  background-color: var(--white);
+}
+
+.rowContainer:nth-child(odd) > .row > div {
   background-color: var(--white);
 }
 
@@ -49,6 +53,24 @@
   padding: 0 6px;
 }
 
+.rowContainer > .row:hover > div {
+  background-color: var(--gray);
+}
+
 .expandedRow {
   background-color: var(--secondary-blue);
+}
+
+.noData {
+  padding: 8px 6px;
+  height: 100%;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-gray);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-medium);
+  border: 1px dashed var(--border-blue);
+  border-radius: 4px;
 }

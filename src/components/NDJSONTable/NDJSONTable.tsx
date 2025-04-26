@@ -6,18 +6,18 @@ import {
   List,
   ScrollParams,
 } from "react-virtualized";
-import { useRemoteNDJSON } from "../../lib/useRemoteNDJSON";
 import styles from "./NDJSONTable.module.css";
 import { classNames } from "../../lib/classNames";
 import { Chevron } from "../icons/Chevron";
 import { LogEntry } from "../LogEntry/LogEntry";
 
 interface NDJSONTableProps {
-  url: string;
+  rows: any[];
+  loadNextChunk: () => void;
+  isDone: boolean;
 }
 
-export function NDJSONTable({ url }: NDJSONTableProps) {
-  const { rows, loadNextChunk } = useRemoteNDJSON(url);
+export function NDJSONTable({ rows, loadNextChunk, isDone }: NDJSONTableProps) {
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
   const listRef = useRef<List>(null);
   const cache = new CellMeasurerCache({
@@ -58,7 +58,9 @@ export function NDJSONTable({ url }: NDJSONTableProps) {
         >
           <div>
             <Chevron rotated={expandedRow === index} />
-            {new Date(rows[index]._time as string).toISOString()}
+            {rows[index]._time
+              ? new Date(rows[index]._time as string).toISOString()
+              : "-"}
           </div>
           <div>
             {expandedRow !== index && <pre>{JSON.stringify(rows[index])}</pre>}
@@ -92,6 +94,7 @@ export function NDJSONTable({ url }: NDJSONTableProps) {
         <div>Event</div>
       </div>
       <div style={{ height: "80vh", width: "100%" }}>
+        {!rows.length && isDone && <div className={styles.noData}>No data</div>}
         <AutoSizer>
           {({ width, height }) => (
             <List

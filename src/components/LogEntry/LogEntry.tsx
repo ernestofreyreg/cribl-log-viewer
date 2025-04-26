@@ -135,7 +135,7 @@ interface LogEntryProps {
 
 export function LogEntry({ logData }: LogEntryProps) {
   return (
-    <div className={styles.logEntryContainer}>
+    <div className={styles.logEntryContainer} data-testid="log-entry-container">
       <JsonObject value={logData} />
     </div>
   );

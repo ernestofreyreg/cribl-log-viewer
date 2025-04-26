@@ -15,6 +15,7 @@ export function Chevron(props: ChevronProps) {
 
   return (
     <svg
+      data-testid="chevron-icon"
       xmlns="http://www.w3.org/2000/svg"
       width={18}
       height={18}
@@ -24,7 +25,6 @@ export function Chevron(props: ChevronProps) {
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
-      className="lucide lucide-chevron-right-icon lucide-chevron-right"
       {...restProps}
       style={combinedStyle}
     >

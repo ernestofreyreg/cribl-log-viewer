@@ -13,28 +13,14 @@ export function useRemoteNDJSON(url: string) {
   const [decoder] = useState(() => new TextDecoder());
   const [buffer, setBuffer] = useState<string>("");
   const [isDone, setIsDone] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const initStream = async () => {
-      const response = await fetch(url);
-      const streamReader = response.body?.getReader();
-      if (streamReader) {
-        setReader(streamReader);
-      }
-    };
-    initStream();
-  }, [url]);
 
   const processChunk = useCallback(async () => {
-    if (!reader || isDone || isLoading) return;
-    setIsLoading(true);
+    if (!reader || isDone) return;
 
     try {
       const { value, done } = await reader.read();
       if (done) {
         setIsDone(true);
-        setIsLoading(false);
         return;
       }
 
@@ -57,14 +43,23 @@ export function useRemoteNDJSON(url: string) {
       setBuffer(lastLine ?? "");
     } catch (err) {
       console.error("Error processing chunk:", err);
-    } finally {
-      setIsLoading(false);
     }
-  }, [reader, buffer, decoder, isDone, isLoading]);
+  }, [reader, buffer, decoder, isDone]);
 
   const loadNextChunk = useCallback(throttle(processChunk, 500), [
     processChunk,
   ]);
+
+  useEffect(() => {
+    const initStream = async () => {
+      const response = await fetch(url);
+      const streamReader = response.body?.getReader();
+      if (streamReader) {
+        setReader(streamReader);
+      }
+    };
+    initStream();
+  }, [url]);
 
   useEffect(() => {
     if (rows.length === 0) {
@@ -72,5 +67,5 @@ export function useRemoteNDJSON(url: string) {
     }
   }, [rows, loadNextChunk]);
 
-  return { rows, isDone, isLoading, loadNextChunk };
+  return { rows, isDone, loadNextChunk };
 }

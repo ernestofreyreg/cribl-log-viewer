@@ -1,4 +1,3 @@
-/* LogEntry.module.css */
 .logEntryContainer {
   font-family: "Consolas", "Monaco", "Courier New", monospace;
   background-color: var(--light-gray);
@@ -25,7 +24,7 @@
 }
 
 .logRow {
-  display: block;
+  display: flex;
   align-items: flex-start;
 }
 
