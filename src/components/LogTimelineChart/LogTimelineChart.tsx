@@ -8,6 +8,7 @@ type LogTimelineChartProps = {
   maxCount: number;
   timeResolution: number;
   onResolutionChange: (resolution: number) => void;
+  loading?: boolean;
 };
 
 const resolutionValues = ["6hour", "12hour", "1day"] as const;
@@ -24,6 +25,7 @@ export function LogTimelineChart({
   maxCount,
   timeResolution,
   onResolutionChange,
+  loading,
 }: LogTimelineChartProps) {
   const numberLines = useMemo(() => {
     if (maxCount === 0) {
@@ -44,72 +46,78 @@ export function LogTimelineChart({
 
   return (
     <div className={styles.logTimelineChart}>
-      <div className={styles.resolutions}>
-        {resolutionValues.map((resolution) => (
-          <button
-            className={classNames(
-              styles.resolution,
-              resolutions[resolution].value === timeResolution &&
-                styles.activeResolution
-            )}
-            type="button"
-            onClick={handleChangeResolution(resolution)}
-            key={resolution}
-          >
-            {resolutions[resolution].label}
-          </button>
-        ))}
-      </div>
-
-      <div className={styles.chartContainer}>
-        <div className={styles.chartNumberLineContainer}>
-          <div className={styles.chartNumberLine} />
-          <div className={styles.chartNumberLine} />
-          <div className={styles.chartNumberLine} />
-          <div className={styles.chartNumberLine} />
-          <div className={styles.chartNumberLine} />
-        </div>
-
-        <div className={styles.chartLegend}>
-          <div className={styles.chartLegendTop}>
-            {numberLines.map((numberLine, index) => (
-              <div className={styles.chartLegendNumber} key={index}>
-                {numberLine}
-              </div>
+      {loading ? (
+        <div className={styles.loading}>Loading...</div>
+      ) : (
+        <>
+          <div className={styles.resolutions}>
+            {resolutionValues.map((resolution) => (
+              <button
+                className={classNames(
+                  styles.resolution,
+                  resolutions[resolution].value === timeResolution &&
+                    styles.activeResolution
+                )}
+                type="button"
+                onClick={handleChangeResolution(resolution)}
+                key={resolution}
+              >
+                {resolutions[resolution].label}
+              </button>
             ))}
           </div>
-          <div className={styles.chartLegendBottom}></div>
-        </div>
 
-        <div className={styles.chartContent}>
-          <div className={styles.chartContentInner}>
-            <div className={styles.chartBars}>
-              {hits.map((hit, index) => (
-                <div
-                  key={hit.minute}
-                  className={styles.bar}
-                  style={{ height: `${(hit.count / maxCount) * 100}%` }}
-                >
-                  {hit.count}
+          <div className={styles.chartContainer}>
+            <div className={styles.chartNumberLineContainer}>
+              <div className={styles.chartNumberLine} />
+              <div className={styles.chartNumberLine} />
+              <div className={styles.chartNumberLine} />
+              <div className={styles.chartNumberLine} />
+              <div className={styles.chartNumberLine} />
+            </div>
+
+            <div className={styles.chartLegend}>
+              <div className={styles.chartLegendTop}>
+                {numberLines.map((numberLine, index) => (
+                  <div className={styles.chartLegendNumber} key={index}>
+                    {numberLine}
+                  </div>
+                ))}
+              </div>
+              <div className={styles.chartLegendBottom}></div>
+            </div>
+
+            <div className={styles.chartContent}>
+              <div className={styles.chartContentInner}>
+                <div className={styles.chartBars}>
+                  {hits.map((hit, index) => (
+                    <div
+                      key={hit.minute}
+                      className={styles.bar}
+                      style={{ height: `${(hit.count / maxCount) * 100}%` }}
+                    >
+                      {hit.count}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              <div className={styles.chartContentBottom}>
+                {hits.map((hit, index) => (
+                  <div key={hit.minute} className={styles.chartBarLabel}>
+                    <div className={styles.chartBarLabelNotch} />
+                    {(index - 1) % 3 === 0 && (
+                      <div className={styles.chartBarLabelText}>
+                        {getFormattedTimestamp(hit.minute, timeResolution)}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-
-          <div className={styles.chartContentBottom}>
-            {hits.map((hit, index) => (
-              <div key={hit.minute} className={styles.chartBarLabel}>
-                <div className={styles.chartBarLabelNotch} />
-                {(index - 1) % 3 === 0 && (
-                  <div className={styles.chartBarLabelText}>
-                    {getFormattedTimestamp(hit.minute, timeResolution)}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }

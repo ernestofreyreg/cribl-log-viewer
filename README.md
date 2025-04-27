@@ -49,3 +49,30 @@ pnpm run test:watch
 I created a simple chart bars component for our project to provide basic data visualization capabilities without overcomplicating the implementation. Since we had limited time to dedicate to this feature, I focused on building something functional rather than comprehensive. The component only uses HTML and CSS modules with React, making it lightweight and easy to maintain without adding heavy dependencies.
 
 Interestingly, the data displayed in these charts shows an unusually even distribution of events, which differs from what we typically see in log data.
+
+## Testing
+
+Unit tests implemented for all components (excluding App component)
+Test coverage exceeds 80%, meeting industry standards for robust applications
+
+### Opportunities for Enhancement
+
+- Visual Testing
+  We could strengthen our testing approach by implementing visual regression tests for UI-focused components:
+
+LogEntry: Verify rendering of various log entry types and states
+Icons: Ensure consistent appearance across different sizes and contexts
+LogTimelineChart: Validate correct visualization of timeline data
+NDJSONTable: Confirm proper formatting and display of complex data structures
+
+- Automated Testing Expansion
+  Additional automated testing opportunities include:
+
+  - Integration tests to verify component interactions
+  - End-to-end tests for critical user flows
+  - Performance testing for data-intensive components
+  - Accessibility compliance testing
+
+### Next Steps
+
+Prioritize implementing visual testing for the identified components to ensure UI consistency with design specifications.

@@ -23,6 +23,7 @@ describe("LogTimelineChart", () => {
         maxCount={3}
         timeResolution={60}
         onResolutionChange={() => {}}
+        loading={false}
       />
     );
 
