@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { throttle } from "./throttle";
 
-interface Row {
-  [key: string]: string | number | boolean | null;
-}
+export function useRemoteNDJSON(
+  url: string,
+  onChunkLoaded?: (chunk: Record<string, any>[]) => void,
+  bufferSize: number = 60 * 1024 // 60Kb for above the fold buffer
+) {
+  const [rows, setRows] = useState<Record<string, any>[]>([]);
 
-export function useRemoteNDJSON(url: string) {
-  const [rows, setRows] = useState<Row[]>([]);
   const [reader, setReader] = useState<ReadableStreamBYOBReader | null>(null);
   const [decoder] = useState(() => new TextDecoder());
   const [buffer, setBuffer] = useState<string>("");
@@ -16,7 +17,7 @@ export function useRemoteNDJSON(url: string) {
     if (!reader || isDone) return;
 
     try {
-      let buffered = new ArrayBuffer(60 * 1024); // 60Kb for above the fold buffer
+      let buffered = new ArrayBuffer(bufferSize);
       const { value, done } = await reader.read(
         new Uint8Array(buffered, 0, buffered.byteLength)
       );
@@ -41,6 +42,7 @@ export function useRemoteNDJSON(url: string) {
         .filter(Boolean);
 
       setRows((prev) => [...prev, ...newItems]);
+      onChunkLoaded?.(newItems);
       setBuffer(lastLine ?? "");
     } catch (err) {
       console.error("Error processing chunk:", err);

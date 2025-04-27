@@ -96,7 +96,7 @@ export function NDJSONTable({ rows, loadNextChunk, isDone }: NDJSONTableProps) {
         <div>Time</div>
         <div>Event</div>
       </div>
-      <div style={{ height: "80vh", width: "100%" }}>
+      <div className={styles.tableContainer}>
         {!rows.length && isDone && <div className={styles.noData}>No data</div>}
         <AutoSizer>
           {({ width, height }) => (

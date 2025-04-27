@@ -1,0 +1,9 @@
+.App {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-px);
+  position: absolute;
+  inset: 0;
+  padding: var(--space-md);
+}

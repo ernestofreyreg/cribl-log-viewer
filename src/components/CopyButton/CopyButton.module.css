@@ -1,7 +1,7 @@
 .copyButton {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: var(--space-xs);
+  right: var(--space-xs);
   border: none;
   background-color: transparent;
   cursor: pointer;

@@ -1,7 +1,4 @@
-import { useCallback, useState } from "react";
-import { Copy } from "../icons/Copy";
 import styles from "./LogEntry.module.css";
-import { Check } from "../icons/Check";
 import { CopyButton } from "../CopyButton/CopyButton";
 
 type JsonValue =

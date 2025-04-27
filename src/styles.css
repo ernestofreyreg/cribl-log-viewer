@@ -1,8 +1,3 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
-}
-
 :root {
   --primary-blue: #e3f2fd;
   --secondary-blue: #bbdefb;
@@ -21,6 +16,7 @@
   --light-gray: #f6f8fa;
   --dark-red: #b31d28;
 
+  --font-size-xsmall: 12px;
   --font-size-small: 14px;
   --font-size-medium: 16px;
   --font-size-large: 20px;
@@ -28,4 +24,12 @@
   --font-weight-light: 300;
   --font-weight-medium: 500;
   --font-weight-bold: 600;
+
+  --space-px: 0.063rem; /* 1px */
+  --space-3xs: 0.125rem; /* 2px */
+  --space-2xs: 0.25rem; /* 4px */
+  --space-xs: 0.5rem; /* 8px */
+  --space-sm: 0.75rem; /* 12px */
+  --space-md: 1rem; /* 16px - base */
+  --space-lg: 1.5rem; /* 24px */
 }

@@ -1,5 +1,12 @@
 .container {
   width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tableContainer {
+  flex-grow: 1;
 }
 
 .gridRow {
@@ -26,7 +33,7 @@
 }
 
 .header > div {
-  padding: 8px 6px;
+  padding: var(--space-xs);
   background-color: var(--secondary-blue);
 }
 
@@ -45,12 +52,12 @@
 .row {
   font-size: var(--font-size-small);
   color: var(--dark-gray);
-  height: 24px;
+  height: var(--space-lg);
   cursor: pointer;
 }
 
 .row > div:last-child {
-  padding: 0 6px;
+  padding: 0 var(--space-xs);
 }
 
 .rowContainer > .row:hover > div {
@@ -62,7 +69,7 @@
 }
 
 .noData {
-  padding: 8px 6px;
+  padding: var(--space-xs);
   height: 100%;
   background-color: var(--white);
   display: flex;
@@ -72,5 +79,4 @@
   font-weight: var(--font-weight-light);
   font-size: var(--font-size-medium);
   border: 1px dashed var(--border-blue);
-  border-radius: 4px;
 }

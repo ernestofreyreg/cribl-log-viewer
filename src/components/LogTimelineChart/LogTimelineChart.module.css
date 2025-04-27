@@ -1,0 +1,176 @@
+.logTimelineChart {
+  height: 160px;
+  width: 100%;
+  position: relative;
+}
+
+.chartContainer {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  width: 100%;
+  height: 100%;
+  background-color: var(--white);
+  position: relative;
+}
+
+.chartLegend {
+  display: flex;
+  flex-direction: column;
+}
+
+.chartLegendTop {
+  flex-grow: 1;
+  border-bottom: 1px solid var(--gray);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.chartLegendNumber {
+  font-size: var(--font-size-xsmall);
+  color: var(--dark-gray);
+  font-style: italic;
+  padding-right: var(--space-2xs);
+}
+
+.chartLegendBottom {
+  flex-basis: 30px;
+  flex-shrink: 0;
+}
+
+.chartContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.chartContentInner {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  position: relative;
+}
+
+.chartNumberLineContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 60px;
+  top: 0;
+  bottom: 30px;
+  right: 0;
+  justify-content: space-between;
+}
+
+.chartNumberLine {
+  width: 100%;
+  height: 1px;
+  background-color: var(--gray);
+}
+
+.chartBars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.chartContentBottom {
+  flex-basis: 30px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chartBarLabel {
+  width: 60px;
+  height: 100%;
+  text-align: center;
+  font-size: var(--font-size-xsmall);
+  color: var(--dark-gray);
+  font-style: italic;
+  flex-shrink: 0;
+  margin: 0 var(--space-2xs);
+  position: relative;
+}
+
+.chartBarLabelText {
+  width: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.chartBarLabelNotch {
+  width: 2px;
+  height: 6px;
+  background-color: var(--gray);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.bar {
+  width: 60px;
+  background-color: var(--dark-blue);
+  flex-shrink: 0;
+  margin-bottom: 20px;
+  position: relative;
+  margin: 0 var(--space-2xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xsmall);
+  color: var(--white);
+}
+
+.bar:hover {
+  background-color: var(--darkest-blue);
+}
+
+.resolutions {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-2xs);
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top: var(--space-2xs);
+  right: var(--space-2xs);
+  z-index: 1;
+}
+
+.resolution {
+  background-color: var(--white);
+  border: 1px solid var(--gray);
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--space-2xs);
+  font-size: var(--font-size-small);
+  color: var(--dark-gray);
+  cursor: pointer;
+}
+
+.resolution:hover {
+  background-color: var(--gray);
+  color: var(--dark-gray);
+}
+
+.resolution.activeResolution {
+  background-color: var(--darkest-blue);
+  color: var(--white);
+}

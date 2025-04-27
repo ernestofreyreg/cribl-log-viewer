@@ -1,7 +1,7 @@
 .viewer {
   background-color: var(--light-gray);
   color: var(--dark-gray);
-  padding: 1rem;
+  padding: var(--space-md);
   font-family: monospace;
   font-size: var(--font-size-small);
   overflow: auto;
@@ -32,5 +32,5 @@
 }
 
 .nested {
-  padding-left: 1.25rem;
+  padding-left: var(--space-md);
 }
