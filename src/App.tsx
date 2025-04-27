@@ -13,12 +13,13 @@ export default function App() {
 
   const [resolution, setResolution] = useState<number>(6 * 60);
 
-  const { hits } = useNDJSONTimelineCounter(url, resolution);
+  const { hits, maxCount } = useNDJSONTimelineCounter(url, resolution);
 
   return (
     <div className={styles.App}>
       <LogTimelineChart
         hits={hits}
+        maxCount={maxCount}
         timeResolution={resolution}
         onResolutionChange={setResolution}
       />

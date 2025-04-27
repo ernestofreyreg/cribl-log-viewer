@@ -5,6 +5,7 @@ export const useNDJSONTimelineCounter = (
   minutesResolution: number
 ) => {
   const [hits, setHits] = useState<{ minute: number; count: number }[]>([]);
+  const [maxCount, setMaxCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -18,6 +19,7 @@ export const useNDJSONTimelineCounter = (
     setError(null);
 
     try {
+      let calculatedMaxCount = 0;
       const response = await fetch(url);
 
       if (!response.ok) {
@@ -41,11 +43,19 @@ export const useNDJSONTimelineCounter = (
 
             if (minuteCountList.length === 0) {
               minuteCountList.push({ minute, count: 1 });
+              calculatedMaxCount = 1;
             } else {
               if (
                 minuteCountList[minuteCountList.length - 1].minute === minute
               ) {
                 minuteCountList[minuteCountList.length - 1].count += 1;
+                if (
+                  minuteCountList[minuteCountList.length - 1].count >
+                  calculatedMaxCount
+                ) {
+                  calculatedMaxCount =
+                    minuteCountList[minuteCountList.length - 1].count;
+                }
               } else {
                 minuteCountList.push({ minute, count: 1 });
               }
@@ -57,6 +67,7 @@ export const useNDJSONTimelineCounter = (
       });
 
       setHits(minuteCountList);
+      setMaxCount(calculatedMaxCount);
     } catch (fetchError) {
       setError(fetchError as Error);
     } finally {
@@ -70,5 +81,5 @@ export const useNDJSONTimelineCounter = (
     }
   }, [url, loadAndProcessData, minutesResolution]);
 
-  return { hits, loading, error };
+  return { hits, loading, error, maxCount };
 };

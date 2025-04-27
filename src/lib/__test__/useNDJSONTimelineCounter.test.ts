@@ -38,6 +38,7 @@ describe("useNDJSONTimelineCounter", () => {
       { minute: 450000, count: 2 },
       { minute: 450001, count: 1 },
     ]);
+    expect(result.current.maxCount).toBe(2);
   });
 
   it("should handle fetch errors", async () => {
@@ -85,7 +86,7 @@ describe("useNDJSONTimelineCounter", () => {
       { minute: 450001, count: 1 },
     ]);
     expect(consoleSpy).toHaveBeenCalled();
-
+    expect(result.current.maxCount).toBe(1);
     consoleSpy.mockRestore();
   });
 });

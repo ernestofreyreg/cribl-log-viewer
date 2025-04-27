@@ -5,6 +5,7 @@ import { classNames } from "../../lib/classNames";
 
 type LogTimelineChartProps = {
   hits: { minute: number; count: number }[];
+  maxCount: number;
   timeResolution: number;
   onResolutionChange: (resolution: number) => void;
 };
@@ -20,15 +21,15 @@ const resolutions: Record<Resolution, { label: string; value: number }> = {
 
 export function LogTimelineChart({
   hits,
+  maxCount,
   timeResolution,
   onResolutionChange,
 }: LogTimelineChartProps) {
-  const maxCount = useMemo(() => {
-    const max = Math.max(...hits.map((hit) => hit.count));
-    return Math.ceil(max * 1.2);
-  }, [hits]);
-
   const numberLines = useMemo(() => {
+    if (maxCount === 0) {
+      return [];
+    }
+
     return [
       ...Array.from({ length: 4 }, (_, index) =>
         Math.floor((maxCount / 4) * (4 - index))

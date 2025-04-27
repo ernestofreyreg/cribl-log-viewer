@@ -20,6 +20,7 @@ describe("LogTimelineChart", () => {
     const { container } = render(
       <LogTimelineChart
         hits={mockData}
+        maxCount={3}
         timeResolution={60}
         onResolutionChange={() => {}}
       />
@@ -32,6 +33,7 @@ describe("LogTimelineChart", () => {
     const { container } = render(
       <LogTimelineChart
         hits={[]}
+        maxCount={0}
         timeResolution={60}
         onResolutionChange={() => {}}
       />
