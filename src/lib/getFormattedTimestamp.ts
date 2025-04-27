@@ -7,6 +7,7 @@ const formatter = new Intl.DateTimeFormat("en-CA", {
   second: "2-digit",
   hour12: false,
   formatMatcher: "basic",
+  timeZone: "UTC",
 });
 
 export function getFormattedTimestamp(minute: number, timeResolution: number) {
