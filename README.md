@@ -53,17 +53,17 @@ Interestingly, the data displayed in these charts shows an unusually even distri
 ## Testing
 
 Unit tests implemented for all components (excluding App component)
-Test coverage exceeds 80%, meeting industry standards for robust applications
+Test coverage exceeds 80%.
 
 ### Opportunities for Enhancement
 
 - Visual Testing
   We could strengthen our testing approach by implementing visual regression tests for UI-focused components:
 
-LogEntry: Verify rendering of various log entry types and states
-Icons: Ensure consistent appearance across different sizes and contexts
-LogTimelineChart: Validate correct visualization of timeline data
-NDJSONTable: Confirm proper formatting and display of complex data structures
+  - LogEntry: Verify rendering of various log entry types and states
+  - Icons: Ensure consistent appearance across different sizes and contexts
+  - LogTimelineChart: Validate correct visualization of timeline data
+  - NDJSONTable: Confirm proper formatting and display of complex data structures
 
 - Automated Testing Expansion
   Additional automated testing opportunities include:
