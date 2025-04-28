@@ -7,7 +7,7 @@ export const useNDJSONTimelineCounter = (
   const [hits, setHits] = useState<{ minute: number; count: number }[]>([]);
   const [maxCount, setMaxCount] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<Error | undefined>(undefined);
 
   const loadAndProcessData = useCallback(async () => {
     if (!url) {
@@ -16,14 +16,14 @@ export const useNDJSONTimelineCounter = (
     }
 
     setLoading(true);
-    setError(null);
+    setError(undefined);
 
     try {
       let calculatedMaxCount = 0;
       const response = await fetch(url);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      if (response.status !== 200) {
+        throw new Error("Failed to fetch data");
       }
 
       const text = await response.text();

@@ -76,3 +76,13 @@ Test coverage exceeds 80%.
 ### Next Steps
 
 Prioritize implementing visual testing for the identified components to ensure UI consistency with design specifications.
+
+## Empty and Error States
+
+### Empty state
+
+![empty-state](public/empty-state.png)
+
+### Error state
+
+![error-state](public/error-state.png)

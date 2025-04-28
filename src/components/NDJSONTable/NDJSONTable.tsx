@@ -15,9 +15,15 @@ interface NDJSONTableProps {
   rows: any[];
   loadNextChunk: () => void;
   isDone: boolean;
+  error?: Error;
 }
 
-export function NDJSONTable({ rows, loadNextChunk, isDone }: NDJSONTableProps) {
+export function NDJSONTable({
+  rows,
+  loadNextChunk,
+  isDone,
+  error,
+}: NDJSONTableProps) {
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
   const listRef = useRef<List>(null);
   const cache = new CellMeasurerCache({
@@ -97,21 +103,26 @@ export function NDJSONTable({ rows, loadNextChunk, isDone }: NDJSONTableProps) {
         <div>Event</div>
       </div>
       <div className={styles.tableContainer}>
-        {!rows.length && isDone && <div className={styles.noData}>No data</div>}
-        <AutoSizer>
-          {({ width, height }) => (
-            <List
-              ref={listRef}
-              deferredMeasurementCache={cache}
-              rowHeight={cache.rowHeight}
-              height={height}
-              rowCount={rows.length}
-              rowRenderer={rowRenderer}
-              width={width}
-              onScroll={handleScroll}
-            />
-          )}
-        </AutoSizer>
+        {!rows.length && isDone && !error && (
+          <div className={styles.noData}>No data</div>
+        )}
+        {error && <div className={styles.error}>{error.message}</div>}
+        {!error && rows.length > 0 && (
+          <AutoSizer>
+            {({ width, height }) => (
+              <List
+                ref={listRef}
+                deferredMeasurementCache={cache}
+                rowHeight={cache.rowHeight}
+                height={height}
+                rowCount={rows.length}
+                rowRenderer={rowRenderer}
+                width={width}
+                onScroll={handleScroll}
+              />
+            )}
+          </AutoSizer>
+        )}
       </div>
     </div>
   );

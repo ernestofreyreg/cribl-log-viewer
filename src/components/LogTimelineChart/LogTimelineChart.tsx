@@ -9,6 +9,7 @@ type LogTimelineChartProps = {
   timeResolution: number;
   onResolutionChange: (resolution: number) => void;
   loading?: boolean;
+  error?: Error;
 };
 
 const resolutionValues = ["6hour", "12hour", "1day"] as const;
@@ -26,6 +27,7 @@ export function LogTimelineChart({
   timeResolution,
   onResolutionChange,
   loading,
+  error,
 }: LogTimelineChartProps) {
   const numberLines = useMemo(() => {
     if (maxCount === 0) {
@@ -46,9 +48,12 @@ export function LogTimelineChart({
 
   return (
     <div className={styles.logTimelineChart}>
-      {loading ? (
-        <div className={styles.loading}>Loading...</div>
-      ) : (
+      {error && <div className={styles.error}>{error.message}</div>}
+      {!error && loading && <div className={styles.loading}>Loading...</div>}
+      {!error && !loading && hits.length === 0 && (
+        <div className={styles.noData}>No data</div>
+      )}
+      {!error && !loading && hits.length > 0 && (
         <>
           <div className={styles.resolutions}>
             {resolutionValues.map((resolution) => (

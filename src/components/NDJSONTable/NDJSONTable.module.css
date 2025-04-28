@@ -70,13 +70,26 @@
 
 .noData {
   padding: var(--space-xs);
-  height: 100%;
   background-color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--dark-gray);
+  color: var(--dark-blue);
   font-weight: var(--font-weight-light);
   font-size: var(--font-size-medium);
   border: 1px dashed var(--border-blue);
+  margin-top: var(--space-2xs);
+}
+
+.error {
+  padding: var(--space-xs);
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-red);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-medium);
+  border: 1px dashed var(--dark-red);
+  margin-top: var(--space-2xs);
 }

@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { LogTimelineChart } from "../LogTimelineChart";
 
 describe("LogTimelineChart", () => {
@@ -41,5 +41,30 @@ describe("LogTimelineChart", () => {
     );
 
     expect(container.querySelectorAll(".bar")).toHaveLength(0);
+  });
+
+  it("displays error message when error is provided", () => {
+    const { container } = render(
+      <LogTimelineChart
+        hits={[]}
+        maxCount={0}
+        timeResolution={60}
+        onResolutionChange={() => {}}
+        error={new Error("Test error")}
+      />
+    );
+    expect(screen.getByText("Test error")).toBeInTheDocument();
+  });
+
+  it("displays empty state when rows are empty and isDone is true", () => {
+    const { container } = render(
+      <LogTimelineChart
+        hits={[]}
+        maxCount={0}
+        timeResolution={60}
+        onResolutionChange={() => {}}
+      />
+    );
+    expect(screen.getByText("No data")).toBeInTheDocument();
   });
 });

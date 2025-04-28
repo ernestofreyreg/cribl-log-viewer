@@ -17,7 +17,7 @@ describe("useNDJSONTimelineCounter", () => {
     `.trim();
 
     mockFetch.mockResolvedValueOnce({
-      ok: true,
+      status: 200,
       text: () => Promise.resolve(mockData),
     });
 
@@ -26,14 +26,14 @@ describe("useNDJSONTimelineCounter", () => {
     );
 
     expect(result.current.loading).toBe(true);
-    expect(result.current.error).toBe(null);
+    expect(result.current.error).toBe(undefined);
 
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
     expect(result.current.loading).toBe(false);
-    expect(result.current.error).toBe(null);
+    expect(result.current.error).toBe(undefined);
     expect(result.current.hits).toEqual([
       { minute: 450000, count: 2 },
       { minute: 450001, count: 1 },
@@ -65,7 +65,7 @@ describe("useNDJSONTimelineCounter", () => {
     `.trim();
 
     mockFetch.mockResolvedValueOnce({
-      ok: true,
+      status: 200,
       text: () => Promise.resolve(mockData),
     });
 
@@ -80,7 +80,7 @@ describe("useNDJSONTimelineCounter", () => {
     });
 
     expect(result.current.loading).toBe(false);
-    expect(result.current.error).toBe(null);
+    expect(result.current.error).toBe(undefined);
     expect(result.current.hits).toEqual([
       { minute: 450000, count: 1 },
       { minute: 450001, count: 1 },

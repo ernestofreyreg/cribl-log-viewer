@@ -10,11 +10,21 @@ import styles from "./App.module.css";
 const url = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
 
 export default function App() {
-  const { rows, loadNextChunk, isDone } = useRemoteNDJSON(url);
+  const {
+    rows,
+    loadNextChunk,
+    isDone,
+    error: dataError,
+  } = useRemoteNDJSON(url);
 
   const [resolution, setResolution] = useState<number>(6 * 60);
 
-  const { hits, maxCount, loading } = useNDJSONTimelineCounter(url, resolution);
+  const {
+    hits,
+    maxCount,
+    loading,
+    error: timelineError,
+  } = useNDJSONTimelineCounter(url, resolution);
 
   return (
     <div className={styles.App}>
@@ -24,8 +34,14 @@ export default function App() {
         timeResolution={resolution}
         onResolutionChange={setResolution}
         loading={loading}
+        error={timelineError}
       />
-      <NDJSONTable rows={rows} loadNextChunk={loadNextChunk} isDone={isDone} />
+      <NDJSONTable
+        rows={rows}
+        loadNextChunk={loadNextChunk}
+        isDone={isDone}
+        error={dataError}
+      />
       <Analytics />
     </div>
   );

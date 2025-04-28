@@ -12,6 +12,7 @@ export function useRemoteNDJSON(
   const [decoder] = useState(() => new TextDecoder());
   const [buffer, setBuffer] = useState<string>("");
   const [isDone, setIsDone] = useState<boolean>(false);
+  const [error, setError] = useState<Error | undefined>(undefined);
 
   const processChunk = useCallback(async () => {
     if (!reader || isDone) return;
@@ -55,12 +56,19 @@ export function useRemoteNDJSON(
 
   useEffect(() => {
     const initStream = async () => {
-      const response = await fetch(url);
-      const streamReader = response.body?.getReader({
-        mode: "byob",
-      });
-      if (streamReader) {
-        setReader(streamReader);
+      try {
+        const response = await fetch(url);
+        if (response.status !== 200) {
+          throw new Error("Failed to fetch data");
+        }
+        const streamReader = response.body?.getReader({
+          mode: "byob",
+        });
+        if (streamReader) {
+          setReader(streamReader);
+        }
+      } catch (err) {
+        setError(err as Error);
       }
     };
     initStream();
@@ -72,5 +80,5 @@ export function useRemoteNDJSON(
     }
   }, [rows, loadNextChunk]);
 
-  return { rows, isDone, loadNextChunk };
+  return { rows, isDone, loadNextChunk, error };
 }

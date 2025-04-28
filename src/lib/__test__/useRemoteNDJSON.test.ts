@@ -26,6 +26,7 @@ describe("useRemoteNDJSON", () => {
     };
 
     global.fetch = jest.fn().mockResolvedValue({
+      status: 200,
       body: {
         getReader: () => mockReader,
       },
@@ -61,6 +62,7 @@ describe("useRemoteNDJSON", () => {
     };
 
     global.fetch = jest.fn().mockResolvedValue({
+      status: 200,
       body: {
         getReader: () => mockReader,
       },
@@ -92,6 +94,7 @@ describe("useRemoteNDJSON", () => {
     };
 
     global.fetch = jest.fn().mockResolvedValue({
+      status: 200,
       body: {
         getReader: () => mockReader,
       },
@@ -113,6 +116,19 @@ describe("useRemoteNDJSON", () => {
         { id: 2 },
         { id: 3 },
       ]);
+    });
+  });
+
+  it("handles fetch errors gracefully", async () => {
+    const mockError = new Error("Fetch error");
+    global.fetch = jest.fn().mockRejectedValue(mockError);
+
+    const { result } = renderHook(() =>
+      useRemoteNDJSON("http://test.com/data")
+    );
+
+    await waitFor(() => {
+      expect(result.current.error).toBe(mockError);
     });
   });
 });

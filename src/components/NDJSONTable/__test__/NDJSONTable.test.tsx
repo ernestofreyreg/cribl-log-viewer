@@ -99,4 +99,23 @@ describe("NDJSONTable", () => {
 
     expect(screen.getByTestId("log-entry-container")).toBeInTheDocument();
   });
+
+  it("displays error message when error is provided", () => {
+    render(
+      <NDJSONTable
+        rows={[]}
+        loadNextChunk={mockLoadNextChunk}
+        isDone={false}
+        error={new Error("Test error")}
+      />
+    );
+    expect(screen.getByText("Test error")).toBeInTheDocument();
+  });
+
+  it("displays empty state when rows are empty and isDone is true", () => {
+    render(
+      <NDJSONTable rows={[]} loadNextChunk={mockLoadNextChunk} isDone={true} />
+    );
+    expect(screen.getByText("No data")).toBeInTheDocument();
+  });
 });

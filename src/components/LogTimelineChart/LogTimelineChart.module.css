@@ -188,3 +188,30 @@
   font-size: var(--font-size-medium);
   color: var(--dark-gray);
 }
+
+.error,
+.noData {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-medium);
+  border-style: dashed;
+  border-width: 1px;
+}
+
+.error {
+  color: var(--dark-red);
+  border-color: var(--dark-red);
+}
+
+.noData {
+  color: var(--dark-blue);
+  border-color: var(--dark-blue);
+}
